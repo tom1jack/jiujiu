@@ -1,0 +1,121 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>九宫格</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>
+*{
+			margin:0px;
+			padding:0px;
+}
+div{
+width:60%;/*400px*/
+height:60%;/*40px*/
+}
+
+.main{
+			padding:3% 0 0 3%;
+}
+.item{
+			float:left;
+			width:30%;
+			padding:30% 0 0 0;
+			border-radius:5px;
+			background:yellow;
+			margin:5px;
+			list-style:none;
+}
+input{
+            width: 100%;
+            height: 40px;
+            background: #fff;
+            border: 1px solid #ffa600;
+            margin: 5px;
+            border-radius: 5px;
+            color:#ffa600;
+            cursor: pointer;
+            outline-style: none;
+        }
+        input:hover{
+            background: #ffa600;
+            color:#fff;
+        }
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	var oUl=document.getElementById("u1");
+	var oLi2=oUl.getElementsByTagName("li");
+	var btn=document.getElementsByTagName("input");
+	var oLi=[];
+	var timer=0;
+	var off=true;
+	
+	btn[0].onclick=function(){
+		if(off){
+			 off=false;
+			 clearInterval(timer);
+			 //kai
+			 timer=setInterval(function(){
+			 start1();
+			 },1000);
+			 start1();
+		}
+	}
+	
+	btn[1].onclick=function(){
+		clearInterval(timer);
+		for(var i=0;i<oLi2.length;i++){
+			oLi2[i].style.background="yellow";
+		}
+		off=true;
+	}
+	
+	function start1(){
+		oLi.length=0;
+		//得到3个数
+		for(var i=0;i<9;i++){
+			oLi2[i].style.background="yellow";
+			oLi.push(oLi2[i]);
+		}
+		oLi.sort(function(a,b){
+			return Math.random()-0.5;
+		});
+		oLi.length=3;
+		//给3个div颜色
+		for(var i=0;i<3;i++){
+		var oMt=Math.ceil(Math.random()*1000000);
+		oLi2[i].index=i;
+				if(oMt>99999&&oMt<1000000){
+				oLi[i].style.backgroundColor="#"+oMt;
+				}else{
+				var oMt2=Math.ceil(Math.random()*1000000);
+				oLi[i].style.backgroundColor="#"+oMt;
+				};
+		}
+		
+	}
+	
+}
+</script>
+</head>
+
+<body>
+
+<div class="main">
+<ul id="u1">
+<li class="item"></li>
+<li class="item"></li>
+<li class="item"></li>
+<li class="item"></li>
+<li class="item"></li>
+<li class="item"></li>
+<li class="item"></li>
+<li class="item"></li>
+<li class="item"></li>
+</ul>
+        <input type="button" value="开始闪">
+        <input type="button" value="结束闪">
+</div>
+</body>
+</html>
